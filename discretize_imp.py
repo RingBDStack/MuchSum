@@ -17,7 +17,6 @@ def discretize_feature(feature, num_bin, discre_path):
     est = preprocessing.KBinsDiscretizer(n_bins=[num_bin for i in range(feature.shape[1])], encode='ordinal')
     est.fit(feature)
     feature = est.transform(feature)
-    #with open("discretizer.pickle", 'wb') as f:
     with open(discre_path, 'wb') as f:
         pickle.dump(est, f)
     return feature
@@ -27,7 +26,6 @@ def load_and_discretize_feature(feature, num_bin, discre_path):
         est = pickle.load(f)
     est.fit(feature)
     feature = est.transform(feature)
-    #with open("discretizer.pickle", 'wb') as f:
     return feature
 
 def get_discrete_importance(args, fea, importance_dim, discre_path):
@@ -67,8 +65,6 @@ def read_data(args, dir_in, graph_key):
 
     for i in range(file_set_id*block_size, min(143,(file_set_id+1)*block_size)):
         data = torch.load('%s/cnndaily.train.%d.pt'%(dir_in, i))
-        #for j in range(len(data)):
-        #    gc.collect()
         new_len = lens_train[-1]+len(data)
         lens_train.append(new_len)
         datas.extend(data)
@@ -77,7 +73,6 @@ def read_data(args, dir_in, graph_key):
     lens_test = [lens_train[-1]]
     for i in range(test_file_num):
         data = torch.load('%s/cnndaily.test.%d.pt'%(dir_in, i))
-        #data = [{'src':d['src'], 'src_txt':d['src_txt'], graph_key:d[graph_key]} for d in data]
         new_len = lens_test[-1]+len(data)
         lens_test.append(new_len)
         datas.extend(data)
@@ -85,7 +80,7 @@ def read_data(args, dir_in, graph_key):
 
 
 def save_data(args, dir_out, datas, lens_train, lens_test):
-    file_set_id = args.file_id#0#7
+    file_set_id = args.file_id
     print(len(datas))
     print("len_train", lens_train, "len_test", lens_test)
 
@@ -106,10 +101,10 @@ if __name__ == "__main__":
     parser.add_argument("-task", default='data', type=str, choices=['data', 'discretizer'])
     args = parser.parse_args()
 
-    fea_type = 'albert'#edge
+    fea_type = 'albert'
     dir_out = 'albert_disc'
     key = 'graph_importance_con'
-    dir_in = 'albert_cen_node'#'heter_cen_con_%s'%fea_type
+    dir_in = 'albert_cen_node'
     datas, lens_train, lens_test = read_data(args, dir_in, 'split_graph')
 
     feature = []
@@ -117,7 +112,7 @@ if __name__ == "__main__":
     for i in range(len(datas)):
         if key in datas[i].keys():
             fea = datas[i][key]
-            feature.append(fea)#(([fea[0], fea[1], fea[3], fea[5]]))
+            feature.append(fea)
         else:
             err_num += 1
             print("L123 error",err_num)
@@ -130,13 +125,6 @@ if __name__ == "__main__":
             datas[i][key] = feature[j]
             j+=1
 
-    """
-    print(len(datas))
-    print("len_train", lens_train, "len_test", lens_test)
-    for i in range(0, len(lens_train)-1):
-        data = datas[lens_train[i]:lens_train[i+1]]
-        torch.save(data, '%s/cnndaily.train.%d.pt'%(dir_out, file_set_id*block_size+i))
-    """
     save_data(args, dir_out, datas, lens_train, lens_test)
 
 
