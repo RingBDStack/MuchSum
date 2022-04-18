@@ -9,11 +9,11 @@ we introduce three specific graph channels to encode the node textual features, 
 
 This project include the code for graph generation. 
 
-![image](picture/model.png)
+![image](Figures/model.png)
 
 ## Graph Generation
 
-`discrete_imp.py`:  discretize importance data
+`discrete_imp.py`:  discretize the importance feature of graph nodes.
 
 `gendata.py`: generate graph based on the given data in which sentence is splitted
 
