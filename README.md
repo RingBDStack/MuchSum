@@ -13,18 +13,22 @@ This project include the code for graph generation.
 
 ## Graph Generation
 
-`discrete_imp.py`:  discretize the importance feature of graph nodes.
-
 `gendata.py`: generate graph based on the given data in which sentence is splitted
+
+`discrete_imp.py`:  discretize the importance feature of graph nodes.
 
 `get_importance_index.py`: calculate node importance according to the generated graph
 
+## Dataset
 
+download dataset from https://drive.google.com/drive/folders/1q_piSrtcGZJM1dBV_J15DAD0G2PIQcTn?usp=sharing
+
+include `cnndaily.train.*.pt` and `cnndaily.test.*.pt`
 
 ## Citation
 
 ```
-@article{MaoLPLHGHW21,
+@article{,
   author    = {Qianren Mao and
                Hongdong Zhu and
                Junnan Li and
