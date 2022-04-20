@@ -19,6 +19,19 @@ This project include the code for graph generation.
 
 `get_importance_index.py`: calculate node importance according to the generated graph
 
+example for input files format:
+
+```json
+[
+    {"src":[101,1,2,3,101,1,2,3],
+    "src_txt":"...",
+    "src_sent_labels":[0,1],
+    "clss":[0,4]
+     // and other contents
+    }
+]
+```
+
 ## Dataset
 
 download dataset from https://drive.google.com/drive/folders/1q_piSrtcGZJM1dBV_J15DAD0G2PIQcTn?usp=sharing
