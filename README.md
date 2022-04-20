@@ -15,22 +15,32 @@ This project include the code for graph generation.
 
 `gendata.py`: generate graph based on the given data in which sentence is splitted
 
-`discrete_imp.py`:  discretize the importance feature of graph nodes.
-
 `get_importance_index.py`: calculate node importance according to the generated graph
 
-example for input files format:
+`discrete_imp.py`:  discretize the importance feature of graph nodes.
+
+example for input files:
 
 ```json
 [
     {"src":[101,1,2,3,101,1,2,3],
-    "src_txt":"...",
+    "src_txt":["...","..."],
     "src_sent_labels":[0,1],
     "clss":[0,4]
      // and other contents
     }
 ]
 ```
+
+graph generate by:
+
+```
+python gendata.py -file_id=0 -block_size=143 -test_file_num 6
+python get_importance_index.py -file_id=0 -block_size=143 -test_file_num 6
+python discrete_imp.py -file_id=0 -block_size=143 -test_file_num 6
+```
+
+
 
 ## Dataset
 
