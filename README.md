@@ -13,9 +13,9 @@ This project include the code for graph generation.
 
 ## Graph Generation
 
-`gendata.py`: generate graph based on the given data in which sentence is splitted
+`gendata.py`: generate graph based on the given data in which sentence is splited.
 
-`get_importance_index.py`: calculate node importance according to the generated graph
+`get_importance_index.py`: calculate node importance according to the generated graph.
 
 `discrete_imp.py`:  discretize the importance feature of graph nodes.
 
@@ -32,7 +32,7 @@ example for input files:
 ]
 ```
 
-graph generate by:
+generate data by:
 
 ```
 python gendata.py -file_id=0 -block_size=143 -test_file_num 6
