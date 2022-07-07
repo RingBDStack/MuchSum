@@ -12,25 +12,25 @@ This project include the code for graph generation.
 ![image](Figures/model.png)
 
 ## Requirement
-`torch`
+* `torch`
 
-`numpy`
+* `numpy`
 
-`networkx`
+* `networkx`
 
-`scikit-learn`
+* `scikit-learn`
 
-`json`
+* `json`
 
-`argparse`
+* `argparse`
 
-`pickle`
+* `pickle`
 
-`matplotlib`
+* `matplotlib`
 
-`nltk`
+* `nltk`
 
-`transformers`
+* `transformers`
 
 
 ## Graph Generation
