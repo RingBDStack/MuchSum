@@ -30,15 +30,11 @@ def load_and_discretize_feature(feature, num_bin, discre_path):
 
 def get_discrete_importance(args, fea, importance_dim, discre_path):
     nums_node = []
-    new_data = []
 
     for x in fea:
         nums_node.append(len(x[0]))
     tmp = [[] for i in range(len(fea[0]))]
     for i in range(len(fea)):
-        if(len(fea[0])!=len(fea[1])): print("get_discrete_importace L41", i,0,1)
-        if(len(fea[0])!=len(fea[2])): print("get_discrete_importace L42", i,0,2)
-        if(len(fea[0])!=len(fea[3])): print("get_discrete_importace L43", i,0,3)
         for j in range(len(fea[0])):
             tmp[j].extend(fea[i][j])
 
@@ -115,7 +111,7 @@ if __name__ == "__main__":
             feature.append(fea)
         else:
             err_num += 1
-            print("L123 error",err_num)
+            print("error num: ",err_num)
     print(len(feature))
 
     feature = get_discrete_importance(args, feature, args.cen_dim, '%s_discretizer.pickle'%fea_type)

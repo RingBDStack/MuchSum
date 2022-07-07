@@ -4,8 +4,6 @@ import argparse
  
 import numpy as np
 from sklearn import preprocessing
-import matplotlib
-import matplotlib.pyplot as plt
 
 import networkx as nx
 import networkx.algorithms.centrality as nx_cen
@@ -39,32 +37,6 @@ def merge_json_pt(json_file, pt_file, new_file=None):
     else:
         return ret
 
-def show_graph(data):
-    words = data['src'].split(" ")
-
-    nodes = []
-    i = 0
-    for node in data['nodes']:
-        cnode = ["%d"%i]
-        i += 1
-        for id in node:
-            cnode.append(words[id])
-        nodes.append(" ".join(cnode).replace(" ##", ""))
-
-    G = nx.Graph()
-
-    for edge in data['edges']:
-        u, v = edge
-        if u >= len(nodes) or v >= len(nodes):
-            continue
-        G.add_edge(nodes[u], nodes[v])
-
-
-    nx.draw(G, with_labels=True)
-    plt.show()
-    plt.close()
-
-
 cnt = 0
 fcnt = 0
 def get_importance(data, key):
@@ -73,12 +45,11 @@ def get_importance(data, key):
     edges = data[key]
     src_ids = data['src'][:512]
 
-
     G.add_edges_from(edges)
     scores = []
 
     f = 0
-    len_score = -1
+    # len_score = -1
     for metric in nx_cen_metric:
         try:
             dic = {}
@@ -86,7 +57,7 @@ def get_importance(data, key):
             if metric == nx_cen.group_betweenness_centrality:
                 score = metric(G, G.nodes)
             elif metric == nx_cen.voterank:
-                len_nodes = len(src_ids)#len_score
+                len_nodes = len(src_ids) # len_score
                 score = metric(G, number_of_nodes=len_nodes)
                 i = len(score)
                 for idx in score:
@@ -103,7 +74,16 @@ def get_importance(data, key):
                 score = list(score.values())
             elif metric == nx_cen.edge_betweenness_centrality:
                 score = metric(G, normalized=True)
-                score = list(score.values())
+                edge_score = []
+                for e in edges:
+                    if (e[0], e[1]) in score:
+                        edge_score.append(score[(e[0], e[1])])
+                    elif (e[1], e[0]) in score:
+                        edge_score.append(score[(e[1], e[0])])
+                    else:
+                        edge_score.append(0)
+                        # print("edge missed")
+                score = edge_score
             else:
                 score = metric(G)
                 score = list(score.values())

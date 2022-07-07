@@ -11,6 +11,28 @@ This project include the code for graph generation.
 
 ![image](Figures/model.png)
 
+## Requirement
+`torch`
+
+`numpy`
+
+`networkx`
+
+`scikit-learn`
+
+`json`
+
+`argparse`
+
+`pickle`
+
+`matplotlib`
+
+`nltk`
+
+`transformers`
+
+
 ## Graph Generation
 
 `gendata.py`: generate graph based on the given data in which sentence is splited.

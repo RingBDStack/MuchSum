@@ -75,9 +75,7 @@ def get_1gram_graph():
                 adata[j]['overlap_graph'] = adj
                 ndata.append(adata[j])
         print(avg_ratio/len(adata))
-        quit()
         torch.save(ndata, 'knn_input_tmp/cnndaily.test.%d.pt'%i)
-
     
     for i in range(143):
         adata = torch.load('src_knn_gen/knn_graph.train.%d.pt'%i)
@@ -186,7 +184,6 @@ def get_heter_graph(args):
             adata[j]['split_graph'] = split_graph
             adata[j]['split_edge_attr'] = split_edge_attr
         torch.save(adata, '%s/cnndaily.test.%d.pt'%(out_dir, i))
-
     
     for i in range(args.file_id*args.block_size, min(file_num, (args.file_id+1)*args.block_size) ):
         adata = torch.load('%s/cnndaily.train.%d.pt'%(in_dir, i))
