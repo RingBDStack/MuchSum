@@ -73,7 +73,7 @@ include `cnndaily.train.*.pt` and `cnndaily.test.*.pt`
 ## Citation
 
 ```
-@article{,
+@inproceedings{miao2022muchsum,
   author    = {Qianren Mao and
                Hongdong Zhu and
                Junnan Li and
@@ -83,14 +83,9 @@ include `cnndaily.train.*.pt` and `cnndaily.test.*.pt`
                Lihong Wang and
                Zheng Wang},
   title     = {MuchSUM: A Multi-channel Graph Neural Network for Extractive Summarization},
-  journal   = {},
-  volume    = {},
-  pages     = {},
-  year      = {2022},
-  url       = {},
-  doi       = {},
-  timestamp = {},
-  biburl    = {},
-  bibsource = {}
+  booktitle={SIGIR},
+  year={2022},
+  organization={ACM}
+}
 ```
 
